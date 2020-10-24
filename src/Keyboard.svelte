@@ -27,7 +27,7 @@
     left: 0;
     z-index: 2;
     height: calc(var(--scale) * 0.4);
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0));
     transform: translateZ(16px) translateY(3px);
   }
 </style>
