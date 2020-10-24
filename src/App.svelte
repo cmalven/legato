@@ -8,7 +8,7 @@
   :global(body) {
     --white-key-ratio: calc(0.875 / 6);
     --black-key-height-ratio: calc(3.9375 / 6);
-    --black-key-ratio: calc(0.4688 / 3.9375);
+    --black-key-ratio: calc(0.5 / 3.9375);
     --scale: 400px;
     --key-margin: calc(var(--scale) * 0.005);
     margin: 0;
