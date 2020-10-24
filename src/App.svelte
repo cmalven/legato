@@ -16,6 +16,7 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: black;
   }
 
   .App {
@@ -25,6 +26,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    perspective: 1000px;
+    transform-style: preserve-3d;
   }
 </style>
 

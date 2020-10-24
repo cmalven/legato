@@ -10,7 +10,6 @@
 
 <style>
   .Key {
-    border: 1px solid gray;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -18,13 +17,19 @@
     height: calc(var(--scale));
     border-radius: calc(var(--scale) * 0.0125);
     margin: var(--key-margin);
+    transform-style: preserve-3d;
+    background-color: white;
+    flex: 0 0 auto;
+    transition:  0.2s;
+    transition-property: transform, background-color, color;
+    transform-origin: 50% -20px;
+    will-change: transform;
   }
 
   .Key.isBlack {
     background-color: black;
     color: white;
     z-index: 1;
-    border-color: black;
     margin-left: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio) * -0.5 - var(--key-margin) / 2);
     margin-right: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio) * -0.5 - var(--key-margin) / 2);
     width: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio));
@@ -54,6 +59,7 @@
   class="Key"
   class:isBlack
   class:on
+  style="transform: rotateX({on ? -3 : 0}deg) translateZ({isBlack ? 15 : 0}px);"
 >
   <p>
     {#each note.names as name}

@@ -14,6 +14,21 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    transform: rotateX(20deg);
+    transform-style: preserve-3d;
+  }
+
+  .Keyboard:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    height: calc(var(--scale) * 0.4);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    transform: translateZ(16px) translateY(3px);
   }
 </style>
 
