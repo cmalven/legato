@@ -8,7 +8,7 @@ module.exports = {
     '@snowpack/plugin-dotenv',
     [
       '@snowpack/plugin-run-script',
-      {cmd: 'svelte-check --output human', watch: '$1 --watch', output: 'stream'},
+      { cmd: 'svelte-check --output human', watch: '$1 --watch', output: 'stream' },
     ],
   ],
   install: [
@@ -18,7 +18,7 @@ module.exports = {
     /* ... */
   },
   devOptions: {
-    /* ... */
+    port: 8090,
   },
   buildOptions: {
     /* ... */
