@@ -20,7 +20,7 @@
     transform-style: preserve-3d;
     background-color: white;
     flex: 0 0 auto;
-    transition:  0.2s;
+    transition: 0.2s;
     transition-property: transform, background-color, color;
     transform-origin: 50% -20px;
     will-change: transform;
