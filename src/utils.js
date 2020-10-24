@@ -24,7 +24,7 @@ export const getNumOctaves = () => {
   return 6;
 };
 
-export const getAllOctaves = () => {
+export const getAllNotes = () => {
   const num = getNumOctaves();
   let allOctaves = [];
   for (let idx = 0, length = num; idx < length; idx++) {

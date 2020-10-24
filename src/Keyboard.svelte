@@ -1,11 +1,11 @@
 <script>
   import { notes, currentOctaveIdx, visibleOctaves } from './stores';
-  import { getAllOctaves, getOctaveLength } from './utils';
+  import { getAllNotes, getOctaveLength } from './utils';
   import Key from './Key.svelte';
 
   let keyOffset = 3;
 
-  const allOctaves = getAllOctaves();
+  const allNotes = getAllNotes();
 </script>
 
 <style>
@@ -18,7 +18,7 @@
 </style>
 
 <div class="Keyboard">
-  {#each allOctaves as note, idx (idx)}
+  {#each allNotes as note, idx (idx)}
     {#if
       Math.floor(idx / getOctaveLength()) >= $currentOctaveIdx &&
       Math.floor(idx / getOctaveLength()) <= $visibleOctaves - 1 + $currentOctaveIdx
