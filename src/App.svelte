@@ -6,10 +6,10 @@
 
 <style type="text/scss">
   :global(body) {
-    --white-key-ratio: calc(0.875 / 6);
-    --black-key-height-ratio: calc(3.9375 / 6);
+    --white-key-ratio: calc(0.875 / 5.7);
+    --black-key-height-ratio: calc(4.2 / 6);
     --black-key-ratio: calc(0.5 / 3.9375);
-    --scale: 400px;
+    --scale: 370px;
     --key-margin: calc(var(--scale) * 0.005);
     margin: 0;
     font-family: 'Arial', 'Helvetica', sans-serif;

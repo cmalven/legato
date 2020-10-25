@@ -10,6 +10,8 @@
 
 <style type="text/scss">
   .Key {
+    --transition-duration: 0.2s;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -20,10 +22,33 @@
     transform-style: preserve-3d;
     background-color: white;
     flex: 0 0 auto;
-    transition: 0.2s;
+    transition: var(--transition-duration);
     transition-property: transform, background-color, color;
     transform-origin: 50% -20px;
     will-change: transform;
+    overflow: hidden;
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 30%;
+      opacity: 0;
+    }
+
+    &:before {
+      left: 0;
+      background-image: linear-gradient(to right, black, rgba(black, 0));
+      transition-property: opacity var(--transition-duration);
+    }
+
+    &:after {
+      right: 0;
+      background-image: linear-gradient(to left, black, rgba(black, 0));
+    }
 
     &.isBlack {
       background-color: black;
@@ -33,11 +58,22 @@
       margin-right: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio) * -0.5 - var(--key-margin) / 2);
       width: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio));
       height: calc(var(--scale) * var(--black-key-height-ratio));
+      box-shadow: 0 0 10px rgba(black, 0.3);
+
+      &:before,
+      &:after {
+        content: none;
+      }
     }
 
     &.on {
       background-color: blue;
       border-color: blue;
+
+      &:before,
+      &:after {
+        opacity: 0.2;
+      }
     }
   }
 
@@ -51,7 +87,16 @@
 
   .index {
     margin-top: 10px;
-    color: lightslategray;
+    color: rgba(black, 0.3);
+    transition-property: color var(--transition-duration);
+
+    .isBlack & {
+      color: rgba(white, 0.4);
+    }
+
+    .on & {
+      color: rgba(white, 0.5);
+    }
   }
 </style>
 
