@@ -3,6 +3,7 @@
   <component name="ProjectStartupSharedConfiguration">
     <configurations>
       <configuration id="npm.start" name="start" />
+      <configuration id="Jest.Test - Watch" name="Test - Watch" />
     </configurations>
   </component>
 </project>
