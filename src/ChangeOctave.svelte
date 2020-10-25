@@ -15,7 +15,7 @@
   }
 </script>
 
-<style>
+<style type="text/scss">
   .ChangeOctave {
     margin-top: 50px;
   }

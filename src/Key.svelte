@@ -8,7 +8,7 @@
   const isBlack = isNoteBlack(note);
 </script>
 
-<style>
+<style type="text/scss">
   .Key {
     display: flex;
     justify-content: center;
@@ -24,21 +24,21 @@
     transition-property: transform, background-color, color;
     transform-origin: 50% -20px;
     will-change: transform;
-  }
 
-  .Key.isBlack {
-    background-color: black;
-    color: white;
-    z-index: 1;
-    margin-left: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio) * -0.5 - var(--key-margin) / 2);
-    margin-right: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio) * -0.5 - var(--key-margin) / 2);
-    width: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio));
-    height: calc(var(--scale) * var(--black-key-height-ratio));
-  }
+    &.isBlack {
+      background-color: black;
+      color: white;
+      z-index: 1;
+      margin-left: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio) * -0.5 - var(--key-margin) / 2);
+      margin-right: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio) * -0.5 - var(--key-margin) / 2);
+      width: calc(var(--scale) * var(--black-key-ratio) * var(--black-key-height-ratio));
+      height: calc(var(--scale) * var(--black-key-height-ratio));
+    }
 
-  .Key.on {
-    background-color: blue;
-    border-color: blue;
+    &.on {
+      background-color: blue;
+      border-color: blue;
+    }
   }
 
   p {

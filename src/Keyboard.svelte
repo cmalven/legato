@@ -8,7 +8,7 @@
   const allNotes = getAllNotes();
 </script>
 
-<style>
+<style type="text/scss">
   .Keyboard {
     width: 90%;
     display: flex;

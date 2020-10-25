@@ -16,6 +16,9 @@ module.exports = {
       processor: 'svelte3/svelte3',
     },
   ],
+  settings: {
+    'svelte3/ignore-styles': () => true,
+  },
   rules: {
     'array-bracket-spacing': ['error', 'never'],
     'block-spacing': ['error', 'always'],
@@ -47,8 +50,5 @@ module.exports = {
     'new-cap': 'error',
     'no-undef': 'off',
     'no-bitwise': ['error', { 'allow': ['~'] }],
-  },
-  settings: {
-    // ...
   },
 };

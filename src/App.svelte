@@ -4,7 +4,7 @@
   import Midi from './Midi.svelte';
 </script>
 
-<style>
+<style type="text/scss">
   :global(body) {
     --white-key-ratio: calc(0.875 / 6);
     --black-key-height-ratio: calc(3.9375 / 6);
