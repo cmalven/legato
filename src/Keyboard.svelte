@@ -1,9 +1,7 @@
 <script>
-  import { notes, currentOctaveIdx, visibleOctaves } from './stores';
-  import { getAllNotes, getOctaveLength } from './utils';
+  import { notes, currentOctaveIdx, visibleOctaves, keyOffset } from './stores';
+  import { getAllNotes, getOctaveLength, noteIdxToMidi } from './utils';
   import Key from './Key.svelte';
-
-  let keyOffset = 3;
 
   const allNotes = getAllNotes();
 </script>
@@ -38,7 +36,11 @@
       Math.floor(idx / getOctaveLength()) >= $currentOctaveIdx &&
       Math.floor(idx / getOctaveLength()) <= $visibleOctaves - 1 + $currentOctaveIdx
     }
-        <Key note={note} idx={idx + keyOffset + 1} on={$notes.indexOf(idx + 24) > -1} />
+        <Key
+          note={note}
+          idx={idx + $keyOffset + 1}
+          on={$notes.indexOf(noteIdxToMidi(idx, $keyOffset)) > -1}
+        />
     {/if}
   {/each}
 </div>

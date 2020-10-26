@@ -32,3 +32,7 @@ export const getAllNotes = () => {
   }
   return allOctaves;
 };
+
+export const noteIdxToMidi = (noteIdx, keyOffset) => {
+  return noteIdx + 21 + keyOffset;
+};

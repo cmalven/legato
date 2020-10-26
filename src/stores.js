@@ -13,6 +13,12 @@ export const currentOctaveIdx = writable(2);
 export const visibleOctaves = writable(3);
 
 /**
+ * How many keys after the default start key - A0 - the visible keyboard should
+ * start. For instance, a value of 3 means that the first key ever displayed will be C0
+ */
+export const keyOffset = writable(3);
+
+/**
  * An array of all all notes that are currently being played.
  * This number is a MIDI value, which means that it starts at 21 (A0)
  * and goes to 108 (C8)
