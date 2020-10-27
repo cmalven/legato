@@ -36,3 +36,7 @@ export const getAllNotes = () => {
 export const noteIdxToMidi = (noteIdx, keyOffset) => {
   return noteIdx + 21 + keyOffset;
 };
+
+export const getOctaveJumps = (numOctaves, octavesPer) => {
+  return numOctaves - octavesPer + 1;
+};

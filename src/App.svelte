@@ -2,6 +2,7 @@
   import Keyboard from './Keyboard.svelte';
   import ChangeOctave from './ChangeOctave.svelte';
   import Midi from './Midi.svelte';
+  import Toolbar from './Toolbar.svelte';
 </script>
 
 <style type="text/scss">
@@ -33,6 +34,12 @@
 
 <div class="App">
   <Midi />
+
+  <Toolbar></Toolbar>
+
   <Keyboard/>
-  <ChangeOctave />
+
+  <Toolbar>
+    <ChangeOctave />
+  </Toolbar>
 </div>
