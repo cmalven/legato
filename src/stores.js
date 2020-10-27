@@ -24,3 +24,13 @@ export const keyOffset = writable(3);
  * and goes to 108 (C8)
  */
 export const notes = writable([]);
+
+/**
+ * The currently selected chord (e.g. C Major)
+ */
+export const currentChord = writable(null);
+
+/**
+ * The currently selected key (e.g. C Major)
+ */
+export const currentKey = writable(null);

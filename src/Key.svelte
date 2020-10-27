@@ -1,9 +1,10 @@
 <script>
-  import { nameToSymbol, isNoteBlack } from './utils';
+  import { formatNotation, isNoteBlack } from './utils';
 
   export let note = null;
   export let on = false;
   export let idx = 0;
+  export let disabled = false;
 
   const isBlack = isNoteBlack(note);
 </script>
@@ -75,17 +76,23 @@
         opacity: 0.2;
       }
     }
+
+    &.disabled {
+      background-color: black;
+      border: 1px solid slategray;
+    }
   }
 
   p {
     font-size: 12px;
   }
 
-  span {
+  .symbol {
     display: block;
   }
 
   .index {
+    display: block;
     margin-top: 10px;
     color: rgba(black, 0.3);
     transition-property: color var(--transition-duration);
@@ -104,12 +111,13 @@
   class="Key"
   class:isBlack
   class:on
+  class:disabled
   style="transform: rotateX({on ? -3 : 0}deg) translateZ({isBlack ? 15 : 0}px);"
 >
   <p>
     {#each note.names as name}
-      <span>
-        {nameToSymbol(name)}
+      <span class="symbol">
+        {formatNotation(name)}
       </span>
     {/each}
 

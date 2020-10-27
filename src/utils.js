@@ -1,14 +1,11 @@
 import { octave } from './config';
-
-export const nameToSymbol = (name) => {
-  return name.replace(' sharp', '♯').replace(' flat', '♭');
-};
+import { Chord, Key, Midi } from '@tonaljs/tonal';
 
 export const isNoteBlack = (note) => {
   return note.names.reduce((acc, val) => {
     if (
-      val.indexOf('sharp') > -1 ||
-      val.indexOf('flat') > -1
+      val.indexOf('#') > -1 ||
+      val.indexOf('b') > -1
     ) {
       acc = true;
     }
@@ -39,4 +36,38 @@ export const noteIdxToMidi = (noteIdx, keyOffset) => {
 
 export const getOctaveJumps = (numOctaves, octavesPer) => {
   return numOctaves - octavesPer + 1;
+};
+
+export const getChordFromNotes = (notes, limitToKey = null) => {
+  // If notes are empty or no key is specified, don't do anything
+  if (!notes.length || !limitToKey) return null;
+
+  let chromaticNotes = notes
+    .map(note => Midi.midiToNoteName(note))
+    .map(note => note.replace(/[0-9]/g, ''));
+
+  // Get the base chords for the scale
+  let chordsForKey = Key.majorKey(limitToKey).chords;
+
+  // And any chords that are reduced versions
+  chordsForKey.forEach(chord => {
+    chordsForKey = chordsForKey.concat(Chord.reduced(chord));
+  });
+
+  // Narrow down to all chords that have all of the current notes
+  let chordsForNotes = chordsForKey.filter(chord => {
+    const notesForChord = Chord.get(chord).notes;
+
+    return chromaticNotes.every(note => notesForChord.indexOf(note) > -1) &&
+      notesForChord.every(note => chromaticNotes.indexOf(note) > -1);
+  });
+
+  return chordsForNotes.length ? chordsForNotes : null;
+};
+
+export const formatNotation = (notation) => {
+  return notation
+    .replace('M', 'maj')
+    .replace('#', '♯')
+    .replace('b', '♭');
 };

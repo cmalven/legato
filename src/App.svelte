@@ -3,9 +3,10 @@
   import ChangeOctave from './ChangeOctave.svelte';
   import Midi from './Midi.svelte';
   import Toolbar from './Toolbar.svelte';
+  import CurrentChord from './CurrentChord.svelte';
 </script>
 
-<style type="text/scss">
+  <style type="text/scss">
   :global(body) {
     --white-key-ratio: calc(0.875 / 5.7);
     --black-key-height-ratio: calc(4.2 / 6);
@@ -13,7 +14,7 @@
     --scale: 370px;
     --key-margin: calc(var(--scale) * 0.005);
     margin: 0;
-    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-family: 'Georgia', 'Times', 'Times New Roman', serif;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -35,7 +36,7 @@
 <div class="App">
   <Midi />
 
-  <Toolbar></Toolbar>
+  <CurrentChord />
 
   <Keyboard/>
 

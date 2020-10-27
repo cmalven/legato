@@ -3,13 +3,13 @@ export const octave = [
     names: ['C'],
   },
   {
-    names: ['C sharp', 'B flat'],
+    names: ['C#', 'Bb'],
   },
   {
     names: ['D'],
   },
   {
-    names: ['D sharp', 'E flat'],
+    names: ['D#', 'Eb'],
   },
   {
     names: ['E'],
@@ -18,19 +18,19 @@ export const octave = [
     names: ['F'],
   },
   {
-    names: ['F sharp', 'G flat'],
+    names: ['F#', 'Gb'],
   },
   {
     names: ['G'],
   },
   {
-    names: ['G sharp', 'A flat'],
+    names: ['G#', 'Ab'],
   },
   {
     names: ['A'],
   },
   {
-    names: ['A sharp', 'B flat'],
+    names: ['A#', 'Bb'],
   },
   {
     names: ['B'],

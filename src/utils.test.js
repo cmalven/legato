@@ -1,10 +1,10 @@
-import { getAllNotes, getOctaveJumps, isNoteBlack, isNoteInChord, nameToSymbol } from './utils';
-
-test('convert name to symbol', () => {
-  expect(nameToSymbol('C')).toBe('C');
-  expect(nameToSymbol('C sharp')).toBe('C♯');
-  expect(nameToSymbol('C flat')).toBe('C♭');
-});
+import {
+  formatNotation,
+  getAllNotes,
+  getChordFromNotes,
+  getOctaveJumps,
+  isNoteBlack,
+} from './utils';
 
 test('is note black', () => {
   expect(isNoteBlack({
@@ -12,7 +12,7 @@ test('is note black', () => {
   })).toBe(false);
 
   expect(isNoteBlack({
-    names: ['C sharp', 'C flat'],
+    names: ['C#', 'Cb'],
   })).toBe(true);
 });
 
@@ -45,4 +45,42 @@ test('get octave jumps', () => {
   expect(
     getOctaveJumps(7, 2),
   ).toBe(6);
+});
+
+test('get chord for notes', () => {
+  let key = 'C';
+  expect(
+    getChordFromNotes([60, 64, 67], key),
+  ).toEqual(['CM']);
+
+  expect(
+    getChordFromNotes([], key),
+  ).toBeNull();
+
+  expect(
+    getChordFromNotes([60, 61, 62, 63, 64, 65], key),
+  ).toBeNull();
+
+  key = 'G';
+  expect(
+    getChordFromNotes([60, 64, 67], key),
+  ).toEqual(['CM']);
+
+  expect(
+    getChordFromNotes([66, 72, 74], key),
+  ).toBeNull();
+});
+
+test('format code', () => {
+  expect(
+    formatNotation('C#'),
+  ).toEqual('C♯');
+
+  expect(
+    formatNotation('Cb'),
+  ).toEqual('C♭');
+
+  expect(
+    formatNotation('CM'),
+  ).toEqual('Cmaj');
 });
