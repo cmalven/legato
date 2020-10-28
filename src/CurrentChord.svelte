@@ -1,11 +1,9 @@
 <script>
- import { notes } from './stores';
- import { getChordFromNotes } from './utils';
- import { formatNotation } from './utils';
+  import { currentKey, notes } from './stores';
+import { getChordFromNotes } from './utils';
+import { formatNotation } from './utils';
 
- export let limitToKey = 'C';
-
- $: currentChord = getChordFromNotes($notes, limitToKey);
+$: currentChord = getChordFromNotes($notes, $currentKey.tonic);
 </script>
 
 <style type="text/scss">

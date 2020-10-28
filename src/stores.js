@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { getKeys } from './utils';
 
 /**
  * The octave, starting with C, that should appear at the start
@@ -33,4 +34,4 @@ export const currentChord = writable(null);
 /**
  * The currently selected key (e.g. C Major)
  */
-export const currentKey = writable(null);
+export const currentKey = writable(getKeys()[0]);

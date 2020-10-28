@@ -71,3 +71,17 @@ export const formatNotation = (notation) => {
     .replace('#', '♯')
     .replace('b', '♭');
 };
+
+export const getKeys = () => {
+  return octave.reduce((acc, item) => {
+    const name = item.names[0];
+    [
+      'major',
+      'minor',
+    ].forEach(variant => {
+      const key = Key[variant + 'Key'](name);
+      acc.push(key);
+    });
+    return acc;
+  }, []);
+};
