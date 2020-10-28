@@ -18,6 +18,10 @@
 
 <div class="KeySelect">
   <select class="select" bind:value={$currentKey}>
+    <option value={null}>
+      Select a key…
+    </option>
+
     {#each getKeys() as key}
       <option value={key}>
         {formatNotation(key.tonic + ' ' + key.type)}

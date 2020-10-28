@@ -3,7 +3,9 @@
 import { getChordFromNotes } from './utils';
 import { formatNotation } from './utils';
 
-$: currentChord = getChordFromNotes($notes, $currentKey.tonic);
+$: currentChord = $currentKey
+    ? getChordFromNotes($notes, $currentKey.tonic)
+    : null;
 </script>
 
 <style type="text/scss">
