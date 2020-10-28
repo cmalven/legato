@@ -7,7 +7,7 @@
   import KeySelect from './KeySelect.svelte';
 </script>
 
-  <style type="text/scss">
+<style type="text/scss">
   :global(body) {
     --white-key-ratio: calc(0.875 / 5.7);
     --black-key-height-ratio: calc(4.2 / 6);

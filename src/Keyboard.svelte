@@ -1,6 +1,6 @@
 <script>
-  import { notes, currentOctaveIdx, visibleOctaves, keyOffset } from './stores';
-  import { getAllNotes, getOctaveLength, noteIdxToMidi } from './utils';
+  import { notes, currentOctaveIdx, visibleOctaves, keyOffset, currentKey } from './stores';
+  import { getAllNotes, getOctaveLength, noteIdxToMidi, noteInCurrentKey } from './utils';
   import Key from './Key.svelte';
 
   const allNotes = getAllNotes();
@@ -26,7 +26,7 @@
     z-index: 2;
     height: calc(var(--scale) * 0.4);
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0));
-    transform: translateZ(16px) translateY(3px);
+    transform: translateZ(16px) translateY(2px);
   }
 </style>
 
@@ -39,6 +39,8 @@
         <Key
           note={note}
           idx={idx + $keyOffset + 1}
+          highlighted={$currentKey && noteInCurrentKey(note, $currentKey)}
+          disabled={$currentKey && !noteInCurrentKey(note, $currentKey)}
           on={$notes.indexOf(noteIdxToMidi(idx, $keyOffset)) > -1}
         />
     {/if}

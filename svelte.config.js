@@ -6,7 +6,7 @@ const preprocessOptions = {
     style: 'scss',
   },
   scss: {
-    // prependData: `@import 'src/styles/_variables.scss';`,
+    prependData: `@import 'src/styles/util';`,
   },
 };
 

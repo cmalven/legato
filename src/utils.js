@@ -77,11 +77,16 @@ export const getKeys = () => {
     const name = item.names[0];
     [
       'major',
-      'minor',
+      // 'minor',
     ].forEach(variant => {
       const key = Key[variant + 'Key'](name);
       acc.push(key);
     });
     return acc;
   }, []);
+};
+
+export const noteInCurrentKey = (note, key) => {
+  // TODO: This currently won't work with flat notes
+  return key.scale.indexOf(note.names[0]) > -1;
 };

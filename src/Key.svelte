@@ -4,12 +4,15 @@
   export let note = null;
   export let on = false;
   export let idx = 0;
+  export let highlighted = false;
   export let disabled = false;
 
   const isBlack = isNoteBlack(note);
 </script>
 
 <style type="text/scss">
+  $key-color: blue;
+
   .Key {
     --transition-duration: 0.2s;
     position: relative;
@@ -67,19 +70,28 @@
       }
     }
 
-    &.on {
-      background-color: blue;
-      border-color: blue;
+    &.highlighted {
+      background-color: lighten($key-color, 40%);
+    }
+
+    &.highlighted.isBlack {
+      background-color: darken($key-color, 20%);
+    }
+
+    &.disabled {
+      .info {
+        opacity: 0;
+      }
+    }
+
+    &.on,
+    &.highlighted.on {
+      background-color: $key-color;
 
       &:before,
       &:after {
         opacity: 0.2;
       }
-    }
-
-    &.disabled {
-      background-color: black;
-      border: 1px solid slategray;
     }
   }
 
@@ -87,23 +99,28 @@
     font-size: 12px;
   }
 
+  .info {
+    transition-property: color var(--transition-duration);
+
+    .isBlack & {
+      color: white;
+    }
+
+    .on:not(.isBlack) & {
+      color: white;
+    }
+  }
+
   .symbol {
-    display: block;
+    > span {
+      display: block;
+    }
   }
 
   .index {
     display: block;
     margin-top: 10px;
-    color: rgba(black, 0.3);
-    transition-property: color var(--transition-duration);
-
-    .isBlack & {
-      color: rgba(white, 0.4);
-    }
-
-    .on & {
-      color: rgba(white, 0.5);
-    }
+    opacity: 0.3;
   }
 </style>
 
@@ -111,16 +128,20 @@
   class="Key"
   class:isBlack
   class:on
+  class:highlighted
   class:disabled
   style="transform: rotateX({on ? -3 : 0}deg) translateZ({isBlack ? 15 : 0}px);"
 >
-  <p>
-    {#each note.names as name}
-      <span class="symbol">
+
+  <div class="info">
+    <p class="symbol">
+      {#each note.names as name}
+      <span>
         {formatNotation(name)}
       </span>
-    {/each}
+      {/each}
+    </p>
 
-    <span class="index">{idx}</span>
-  </p>
+    <p class="index">{idx}</p>
+  </div>
 </div>

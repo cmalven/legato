@@ -8,10 +8,16 @@
     color: white;
     margin-bottom: 50px;
   }
+
+  .select {
+    @include border-common;
+    background-color: transparent;
+    color: white;
+  }
 </style>
 
 <div class="KeySelect">
-  <select bind:value={$currentKey}>
+  <select class="select" bind:value={$currentKey}>
     {#each getKeys() as key}
       <option value={key}>
         {formatNotation(key.tonic + ' ' + key.type)}
