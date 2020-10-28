@@ -42,9 +42,8 @@ export const getChordFromNotes = (notes, limitToKey = null) => {
   // If notes are empty or no key is specified, don't do anything
   if (!notes.length || !limitToKey) return null;
 
-  let chromaticNotes = notes
-    .map(note => Midi.midiToNoteName(note))
-    .map(note => note.replace(/[0-9]/g, ''));
+  let chromaticNotesFlat = notes.map(note => Midi.midiToNoteName(note, { pitchClass: true }));
+  let chromaticNotesSharp = notes.map(note => Midi.midiToNoteName(note, { pitchClass: true, sharps: true }));
 
   // Get the base chords for the scale
   let chordsForKey = Key.majorKey(limitToKey).chords;
@@ -53,13 +52,20 @@ export const getChordFromNotes = (notes, limitToKey = null) => {
   chordsForKey.forEach(chord => {
     chordsForKey = chordsForKey.concat(Chord.reduced(chord));
   });
+  console.log(chordsForKey);
 
   // Narrow down to all chords that have all of the current notes
   let chordsForNotes = chordsForKey.filter(chord => {
     const notesForChord = Chord.get(chord).notes;
 
-    return chromaticNotes.every(note => notesForChord.indexOf(note) > -1) &&
-      notesForChord.every(note => chromaticNotes.indexOf(note) > -1);
+    // TODO: Pretty major repetition of code here
+    const matchFlat = chromaticNotesFlat.every(note => notesForChord.indexOf(note) > -1) &&
+      notesForChord.every(note => chromaticNotesFlat.indexOf(note) > -1);
+
+    const matchSharp = chromaticNotesSharp.every(note => notesForChord.indexOf(note) > -1) &&
+      notesForChord.every(note => chromaticNotesSharp.indexOf(note) > -1);
+
+    return matchFlat || matchSharp;
   });
 
   return chordsForNotes.length ? chordsForNotes : null;
