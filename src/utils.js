@@ -52,7 +52,6 @@ export const getChordFromNotes = (notes, limitToKey = null) => {
   chordsForKey.forEach(chord => {
     chordsForKey = chordsForKey.concat(Chord.reduced(chord));
   });
-  console.log(chordsForKey);
 
   // Narrow down to all chords that have all of the current notes
   let chordsForNotes = chordsForKey.filter(chord => {
