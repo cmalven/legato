@@ -24,8 +24,8 @@
 
 <div class="CurrentChord">
   {#if currentChord}
-      {#each currentChord as chord}
-        <span class="chord">{formatNotation(chord)}</span>
-      {/each}
+    {#each currentChord as chord}
+      <span class="chord">{formatNotation(chord)}</span>
+    {/each}
   {/if}
 </div>
