@@ -87,6 +87,5 @@ export const getKeys = () => {
 };
 
 export const noteInCurrentKey = (note, key) => {
-  // TODO: This currently won't work with flat notes
-  return key.scale.indexOf(note.names[0]) > -1;
+  return note.names.filter(name => key.scale.indexOf(name) > -1).length;
 };
