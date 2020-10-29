@@ -1,6 +1,7 @@
 <script>
   import { currentOctaveIdx, visibleOctaves } from './stores';
   import { getNumOctaves, getOctaveJumps } from './utils';
+  import ControlSet from './ControlSet.svelte';
 
   $: octaveJumps = getOctaveJumps(getNumOctaves(), $visibleOctaves);
 
@@ -24,12 +25,18 @@
 </script>
 
 <style type="text/scss">
-  .ChangeOctave {}
-
-  .indicator {
+  .ChangeOctave {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .indicators {
+    display: flex;
+    width: 70px;
     justify-content: space-between;
     align-items: center;
+    margin-right: 20px;
   }
 
   .indicator-dot {
@@ -40,6 +47,11 @@
     border-radius: 50%;
     opacity: 0.2;
     cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.5;
+    }
 
     &.is-active {
       opacity: 1;
@@ -47,7 +59,7 @@
   }
 
   .btns {
-    margin-top: 15px;
+
   }
 
   .btn {
@@ -56,7 +68,7 @@
     border: none;
     color: white;
     cursor: pointer;
-    padding: 4px 0;
+    padding: 5px 0;
     border-bottom: 1px solid transparent;
 
     & + & {
@@ -85,18 +97,20 @@
   }
 </style>
 
-<div class="ChangeOctave">
-  <div class="indicator">
-    {#each Array(octaveJumps) as _, idx}
-      <span
-        class="indicator-dot" class:is-active={idx === $currentOctaveIdx}
-        on:click={setOctave.bind(null, idx)}
-      ></span>
-    {/each}
-  </div>
+<ControlSet label="Octave">
+  <div class="ChangeOctave">
+    <div class="indicators">
+      {#each Array(octaveJumps) as _, idx}
+    <span
+      class="indicator-dot" class:is-active={idx === $currentOctaveIdx}
+      on:click={setOctave.bind(null, idx)}
+    ></span>
+      {/each}
+    </div>
 
-  <div class="btns">
-    <button on:click={prevOctave} class="btn btn--prev">Previous</button>
-    <button on:click={nextOctave} class="btn btn--next">Next</button>
+    <div class="btns">
+      <button on:click={prevOctave} class="btn btn--prev">Previous</button>
+      <button on:click={nextOctave} class="btn btn--next">Next</button>
+    </div>
   </div>
-</div>
+</ControlSet>

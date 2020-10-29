@@ -34,3 +34,8 @@ export const currentChord = writable(null);
  * The currently selected key (e.g. C Major)
  */
 export const currentKey = writable(null);
+
+/**
+ * The currently selected chord progression
+ */
+export const currentChordProgression = writable(null);

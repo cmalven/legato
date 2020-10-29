@@ -7,7 +7,7 @@
     @include border-common;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin: 40px 0;
   }
 </style>

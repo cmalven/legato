@@ -68,7 +68,7 @@ test('get chord for notes', () => {
 
   expect(
     getChordFromNotes([66, 72, 74], key),
-  ).toBeNull();
+  ).toEqual(['D7no5']);
 });
 
 test('format code', () => {

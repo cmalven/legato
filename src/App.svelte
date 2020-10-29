@@ -5,6 +5,7 @@
   import Toolbar from './Toolbar.svelte';
   import CurrentChord from './CurrentChord.svelte';
   import KeySelect from './KeySelect.svelte';
+  import Chords from './Chords.svelte';
 </script>
 
 <style type="text/scss">
@@ -37,9 +38,11 @@
 <div class="App">
   <Midi />
 
-  <KeySelect />
-
-  <CurrentChord />
+  <Toolbar>
+    <KeySelect />
+    <Chords />
+    <CurrentChord />
+  </Toolbar>
 
   <Keyboard/>
 

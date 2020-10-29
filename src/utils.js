@@ -1,5 +1,5 @@
 import { octave } from './config';
-import { Chord, Key, Midi } from '@tonaljs/tonal';
+import { Chord, Key, Midi, Progression } from '@tonaljs/tonal';
 
 export const isNoteBlack = (note) => {
   return note.names.reduce((acc, val) => {
@@ -91,6 +91,21 @@ export const getKeys = () => {
   }, []);
 };
 
+export const getChordProgressions = () => {
+  return [
+    ['I', 'IV', 'V7'],
+    ['I', 'V', 'vim', 'IV'],
+    ['I', 'IV', 'V', 'IV'],
+    ['I', 'vim', 'IV', 'V'],
+    ['iim7', 'V7', 'I7'],
+  ];
+};
+
 export const noteInCurrentKey = (note, key) => {
   return note.names.filter(name => key.scale.indexOf(name) > -1).length;
+};
+
+export const getProgressionForKey = (progression, key) => {
+  if (!key || !progression) return [];
+  return Progression.fromRomanNumerals(key.tonic, progression);
 };
