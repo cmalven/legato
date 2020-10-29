@@ -28,7 +28,7 @@ export const notes = writable([]);
 /**
  * The currently selected chord (e.g. C Major)
  */
-export const currentChord = writable(null);
+export const selectedChord = writable(null);
 
 /**
  * The currently selected key (e.g. C Major)

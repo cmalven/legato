@@ -1,6 +1,7 @@
 <style type="text/scss">
   .ControlLabel {
     color: white;
+    margin: 0;
     margin-bottom: 15px;
     text-transform: uppercase;
     font-size: 12px;

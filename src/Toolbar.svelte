@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 40px 0;
+    padding: 20px 0;
   }
 </style>
 
