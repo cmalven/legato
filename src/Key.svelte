@@ -4,6 +4,7 @@
   export let note = null;
   export let on = false;
   export let idx = 0;
+  export let selected = false;
   export let highlighted = false;
   export let disabled = false;
 
@@ -12,6 +13,7 @@
 
 <style type="text/scss">
   $key-color: blue;
+  $highlight-color: red;
 
   .Key {
     --transition-duration: 0.2s;
@@ -78,10 +80,30 @@
       background-color: darken($key-color, 20%);
     }
 
+    &.selected {
+      background-color: lighten($highlight-color, 25%);
+    }
+
+    &.selected.isBlack {
+      background-color: lighten($highlight-color, 20%);
+    }
+
     &.disabled {
       .info {
         opacity: 0;
       }
+    }
+
+    &.selected {
+      background-color: lighten($highlight-color, 25%);
+
+      .info {
+        opacity: 1;
+      }
+    }
+
+    &.selected.isBlack {
+      background-color: lighten($highlight-color, 20%);
     }
 
     &.on,
@@ -129,6 +151,7 @@
   class:isBlack
   class:on
   class:highlighted
+  class:selected
   class:disabled
   style="transform: rotateX({on ? -3 : 0}deg) translateZ({isBlack ? 15 : 0}px);"
 >

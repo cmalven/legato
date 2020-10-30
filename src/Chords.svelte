@@ -1,8 +1,9 @@
 <script>
   import { currentChordProgression, currentKey } from './stores';
-  import { getChordProgressions, getProgressionForKey, formatNotation } from './utils';
+  import { getChordProgressions, getProgressionForKey } from './utils';
   import ControlSet from './ControlSet.svelte';
   import Select from './Select.svelte';
+  import Chord from './Chord.svelte';
 
   $: chordList = getProgressionForKey($currentChordProgression, $currentKey);
 
@@ -16,7 +17,8 @@
 
 <style type="text/scss">
   .chord-list {
-    color: white;
+    display: flex;
+    margin-left: -10px;
   }
 </style>
 
@@ -29,6 +31,10 @@
   />
 
   {#if $currentKey && $currentChordProgression}
-    <p class="chord-list">{formatNotation(chordList.join(' / '))}<p>
+    <p class="chord-list">
+      {#each chordList as chord}
+        <Chord name={chord} />
+      {/each}
+    <p>
   {/if}
 </ControlSet>

@@ -106,6 +106,26 @@ export const noteInCurrentKey = (note, key) => {
 };
 
 export const getProgressionForKey = (progression, key) => {
+  console.log(key);
   if (!key || !progression) return [];
   return Progression.fromRomanNumerals(key.tonic, progression);
+};
+
+export const getFirstMidiNoteForOctave = (noteName, octaveIdx) => {
+  const notePosition = noteName + (octaveIdx + 1);
+  return Midi.toMidi(notePosition);
+};
+
+export const getKeysForSelectedChord = (chordName, octaveIdx) => {
+  const chord = Chord.get(chordName);
+  if (chord.empty) return [];
+
+  const notes = chord.notes;
+
+  const midiNotes = notes.map((note, idx) => {
+    const firstNote = getFirstMidiNoteForOctave(note, octaveIdx);
+    return Midi.toMidi(firstNote);
+  });
+
+  return midiNotes;
 };

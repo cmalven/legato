@@ -1,9 +1,11 @@
 <script>
-  import { notes, currentOctaveIdx, visibleOctaves, keyOffset, currentKey } from './stores';
-  import { getAllNotes, getOctaveLength, noteIdxToMidi, noteInCurrentKey } from './utils';
+  import { notes, currentOctaveIdx, visibleOctaves, keyOffset, currentKey, selectedChord } from './stores';
+  import { getAllNotes, getKeysForSelectedChord, getOctaveLength, noteIdxToMidi, noteInCurrentKey } from './utils';
   import Key from './Key.svelte';
 
   const allNotes = getAllNotes();
+
+  $: keysInSelectedChord = getKeysForSelectedChord($selectedChord, $currentOctaveIdx);
 </script>
 
 <style type="text/scss">
@@ -42,6 +44,7 @@
           idx={idx + $keyOffset + 1}
           highlighted={$currentKey && noteInCurrentKey(note, $currentKey)}
           disabled={$currentKey && !noteInCurrentKey(note, $currentKey)}
+          selected={keysInSelectedChord.indexOf(noteIdxToMidi(idx, $keyOffset)) > -1}
           on={$notes.indexOf(noteIdxToMidi(idx, $keyOffset)) > -1}
         />
     {/if}

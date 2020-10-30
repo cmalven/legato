@@ -1,7 +1,7 @@
 import {
   formatNotation,
   getAllNotes,
-  getChordFromNotes,
+  getChordFromNotes, getFirstMidiNoteForOctave,
   getOctaveJumps,
   isNoteBlack,
 } from './utils';
@@ -83,4 +83,18 @@ test('format code', () => {
   expect(
     formatNotation('CM'),
   ).toEqual('Cmaj');
+});
+
+test('get first midi note for octave', () => {
+  expect(
+    getFirstMidiNoteForOctave('A', 0),
+  ).toEqual(33);
+
+  expect(
+    getFirstMidiNoteForOctave('C', 0),
+  ).toEqual(24);
+
+  expect(
+    getFirstMidiNoteForOctave('C', 1),
+  ).toEqual(36);
 });

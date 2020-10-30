@@ -11,6 +11,7 @@
     background-color: transparent;
     color: white;
     padding: 10px 8px;
+    min-width: 250px;
   }
 </style>
 
