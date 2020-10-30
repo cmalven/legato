@@ -77,7 +77,7 @@
     }
 
     &.highlighted.isBlack {
-      background-color: darken($key-color, 20%);
+      background-color: darken($key-color, 30%);
     }
 
     &.selected {
