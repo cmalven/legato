@@ -1,11 +1,11 @@
 <script>
   import { notes, currentOctaveIdx, visibleOctaves, keyOffset, currentKey, selectedChord } from './stores';
-  import { getAllNotes, getKeysForSelectedChord, getOctaveLength, noteIdxToMidi, noteInCurrentKey } from './utils';
+  import { getAllNotes, getMidiForSelectedChord, getOctaveLength, noteIdxToMidi, noteInCurrentKey } from './utils';
   import Key from './Key.svelte';
 
   const allNotes = getAllNotes();
 
-  $: keysInSelectedChord = getKeysForSelectedChord($selectedChord, $currentOctaveIdx);
+  $: keysInSelectedChord = getMidiForSelectedChord($selectedChord, $currentOctaveIdx);
 </script>
 
 <style type="text/scss">

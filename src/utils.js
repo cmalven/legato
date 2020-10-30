@@ -111,19 +111,27 @@ export const getProgressionForKey = (progression, key) => {
   return Progression.fromRomanNumerals(key.tonic, progression);
 };
 
-export const getFirstMidiNoteForOctave = (noteName, octaveIdx) => {
-  const notePosition = noteName + (octaveIdx + 1);
-  return Midi.toMidi(notePosition);
+export const getFirstMidiNoteForOctave = (noteName, octaveIdx, afterMidi = 0) => {
+  let octIdx = octaveIdx;
+  let midiPosition = -1;
+  while(midiPosition < afterMidi) {
+    const notePosition = noteName + (octIdx + 1);
+    midiPosition = Midi.toMidi(notePosition);
+    octIdx++;
+  }
+  return midiPosition;
 };
 
-export const getKeysForSelectedChord = (chordName, octaveIdx) => {
+export const getMidiForSelectedChord = (chordName, octaveIdx) => {
   const chord = Chord.get(chordName);
   if (chord.empty) return [];
 
   const notes = chord.notes;
 
+  const firstNotePosition = getFirstMidiNoteForOctave(notes[0], octaveIdx);
+
   const midiNotes = notes.map((note, idx) => {
-    const firstNote = getFirstMidiNoteForOctave(note, octaveIdx);
+    const firstNote = getFirstMidiNoteForOctave(note, octaveIdx, firstNotePosition);
     return Midi.toMidi(firstNote);
   });
 
