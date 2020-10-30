@@ -1,18 +1,9 @@
 <script>
   import { currentChordProgression, currentKey } from './stores';
-  import { getChordProgressions, getProgressionForKey } from './utils';
-  import ControlSet from './ControlSet.svelte';
-  import Select from './Select.svelte';
   import Chord from './Chord.svelte';
+  import { getProgressionForKey } from './utils';
 
   $: chordList = getProgressionForKey($currentChordProgression, $currentKey);
-
-  const options = getChordProgressions().map(progression => {
-    return {
-      label: progression.join(' / '),
-      value: progression,
-    };
-  });
 </script>
 
 <style type="text/scss">
@@ -22,14 +13,7 @@
   }
 </style>
 
-<ControlSet label="Chords">
-  <Select
-    options={options}
-    placeholder="Select a progression…"
-    bind:value={$currentChordProgression}
-    disabled={!$currentKey}
-  />
-
+<div class="Chords">
   {#if $currentKey && $currentChordProgression}
     <p class="chord-list">
       {#each chordList as chord}
@@ -37,4 +21,4 @@
       {/each}
     <p>
   {/if}
-</ControlSet>
+</div>

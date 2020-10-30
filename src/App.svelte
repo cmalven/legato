@@ -5,8 +5,9 @@
   import Toolbar from './Toolbar.svelte';
   import CurrentChord from './CurrentChord.svelte';
   import KeySelect from './KeySelect.svelte';
-  import Chords from './Chords.svelte';
+  import ChordProgression from './ChordProgression.svelte';
   import ControlLayout from './ControlLayout.svelte';
+  import Chords from './Chords.svelte';
 </script>
 
 <style type="text/scss">
@@ -40,11 +41,13 @@
   <Midi />
 
   <ControlLayout>
-    <span slot="left"></span>
+    <span slot="left">
+      <Chords />
+    </span>
     <span slot="center">
       <Toolbar>
         <KeySelect />
-        <Chords />
+        <ChordProgression />
       </Toolbar>
     </span>
     <span slot="right">
