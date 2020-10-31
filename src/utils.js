@@ -106,7 +106,6 @@ export const noteInCurrentKey = (note, key) => {
 };
 
 export const getProgressionForKey = (progression, key) => {
-  console.log(key);
   if (!key || !progression) return [];
   return Progression.fromRomanNumerals(key.tonic, progression);
 };
