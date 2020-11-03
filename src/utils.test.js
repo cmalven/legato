@@ -48,7 +48,7 @@ test('get octave jumps', () => {
 });
 
 test('get chord for notes', () => {
-  let key = 'C';
+  let key = { tonic: 'C', type: 'major' };
   expect(
     getChordFromNotes([60, 64, 67], key),
   ).toEqual(['CM']);
@@ -61,7 +61,7 @@ test('get chord for notes', () => {
     getChordFromNotes([60, 61, 62, 63, 64, 65], key),
   ).toBeNull();
 
-  key = 'G';
+  key = { tonic: 'G', type: 'major' };
   expect(
     getChordFromNotes([60, 64, 67], key),
   ).toEqual(['CM']);

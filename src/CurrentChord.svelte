@@ -4,7 +4,7 @@ import { getChordFromNotes } from './utils';
 import { formatNotation } from './utils';
 
 $: currentChord = $currentKey
-    ? getChordFromNotes($notes, $currentKey.tonic)
+    ? getChordFromNotes($notes, $currentKey)
     : null;
 </script>
 

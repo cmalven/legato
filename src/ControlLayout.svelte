@@ -1,14 +1,18 @@
 <style type="text/scss">
   .ControlLayout {
-    width: 93%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
 
+  .center {
+    padding: 0 30px;
+  }
+
   .left,
   .right {
-    width: 150px;
+    width: 350px;
   }
 </style>
 

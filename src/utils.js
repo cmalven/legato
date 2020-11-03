@@ -46,12 +46,7 @@ export const getChordFromNotes = (notes, limitToKey = null) => {
   let chromaticNotesSharp = notes.map(note => Midi.midiToNoteName(note, { pitchClass: true, sharps: true }));
 
   // Get the base chords for the scale
-  let chordsForKey = Key.majorKey(limitToKey).chords;
-
-  // And any chords that are reduced versions
-  chordsForKey.forEach(chord => {
-    chordsForKey = chordsForKey.concat(Chord.reduced(chord));
-  });
+  let chordsForKey = getChordsForKey(limitToKey);
 
   // Narrow down to all chords that have all of the current notes
   let chordsForNotes = chordsForKey.filter(chord => {
@@ -108,6 +103,28 @@ export const noteInCurrentKey = (note, key) => {
 export const getProgressionForKey = (progression, key) => {
   if (!key || !progression) return [];
   return Progression.fromRomanNumerals(key.tonic, progression);
+};
+
+export const getChordsForKey = (key) => {
+  if (!key) return [];
+
+  const keyFunc = key.type === 'major'
+    ? 'majorKey'
+    : 'minorKey';
+
+  let chordsForKey = Key[keyFunc](key.tonic).chords;
+
+  // And any chords that are reduced versions
+  chordsForKey = chordsForKey.reduce((acc, chord) => {
+    return acc.concat([chord, ...Chord.reduced(chord)]);
+  }, []);
+
+  // Filter out any 2-note chords
+  chordsForKey = chordsForKey.filter(chord => {
+    return Chord.get(chord).notes.length > 2;
+  });
+
+  return chordsForKey;
 };
 
 export const getFirstMidiNoteForOctave = (noteName, octaveIdx, afterMidi = 0) => {

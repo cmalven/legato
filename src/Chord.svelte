@@ -21,10 +21,8 @@
   .Chord {
     @include border-common;
     padding: 8px;
-    min-width: 37px;
     color: white;
     transition: border-color 0.2s;
-    margin-left: 10px;
 
     &:hover {
       border-color: white;
