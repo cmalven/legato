@@ -44,3 +44,13 @@ export const currentChordProgression = writable(null);
  * Is the mouse currently pressed down
  */
 export const isMousePressed = writable(false);
+
+/**
+ * Play synthesized sounds
+ */
+export const playSynthSounds = writable(true);
+
+/**
+ * The synth instrument
+ */
+export const synthInstrument = writable(null);

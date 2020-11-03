@@ -1,10 +1,8 @@
 <script>
   import { currentChordProgression, currentKey } from './stores';
-  import { getChordProgressions, getProgressionForKey } from './utils';
+  import { getChordProgressions } from './utils';
   import ControlSet from './ControlSet.svelte';
   import Select from './Select.svelte';
-
-  $: chordList = getProgressionForKey($currentChordProgression, $currentKey);
 
   const options = getChordProgressions().map(progression => {
     return {
@@ -13,13 +11,6 @@
     };
   });
 </script>
-
-<style type="text/scss">
-  .chord-list {
-    display: flex;
-    margin-left: -10px;
-  }
-</style>
 
 <ControlSet label="Chords">
   <Select

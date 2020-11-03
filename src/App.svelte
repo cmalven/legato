@@ -8,6 +8,7 @@
   import ChordProgression from './ChordProgression.svelte';
   import ControlLayout from './ControlLayout.svelte';
   import Chords from './Chords.svelte';
+  import SynthInstruments from './SynthInstruments.svelte';
 </script>
 
 <style type="text/scss">
@@ -59,7 +60,9 @@
   <Keyboard/>
 
   <ControlLayout>
-    <span slot="left"></span>
+    <span slot="left">
+      <SynthInstruments />
+    </span>
     <span slot="center">
       <Toolbar>
         <ChangeOctave />

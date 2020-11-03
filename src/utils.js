@@ -153,3 +153,13 @@ export const getMidiForSelectedChord = (chordName, octaveIdx) => {
 
   return midiNotes;
 };
+
+
+export const loadScript = (src, callback, script) => {
+  script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.onload = callback();
+  script.src = src;
+  document.getElementsByTagName('head')[0].appendChild(script);
+};

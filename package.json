@@ -7,6 +7,7 @@
   "dependencies": {
     "@tonaljs/tonal": "^4.2.1",
     "svelte": "^3.24.0",
+    "webaudiofont": "^2.5.53",
     "webmidi": "^2.5.1"
   },
   "devDependencies": {
