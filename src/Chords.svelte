@@ -11,7 +11,7 @@
 <style type="text/scss">
   .chord-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     grid-gap: 10px;
   }
 </style>

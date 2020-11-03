@@ -20,6 +20,8 @@
 <style type="text/scss">
   .Chord {
     @include border-common;
+    font-size: 12px;
+    line-height: 15px;
     padding: 8px;
     color: white;
     transition: border-color 0.2s;
