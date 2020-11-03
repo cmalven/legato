@@ -10,6 +10,15 @@ module.exports = {
       '@snowpack/plugin-run-script',
       { cmd: 'svelte-check --output human', watch: '$1 --watch', output: 'stream' },
     ],
+    [
+      '@snowpack/plugin-webpack',
+      {
+        extendConfig: config => {
+          /** Make any changes to webpack config here… */
+          return config;
+        },
+      },
+    ],
   ],
   install: [
     /* ... */

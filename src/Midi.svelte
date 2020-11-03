@@ -2,7 +2,6 @@
   import WebMidi from 'webmidi';
   import { notes } from './stores';
 
-
   const midiListen = () => {
     console.log('listening');
     WebMidi.inputs.forEach(input => {
