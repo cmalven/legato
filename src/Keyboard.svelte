@@ -1,11 +1,27 @@
 <script>
-  import { notes, currentOctaveIdx, visibleOctaves, keyOffset, currentKey, selectedChord } from './stores';
+  import {
+    notes,
+    currentOctaveIdx,
+    visibleOctaves,
+    keyOffset,
+    currentKey,
+    selectedChord,
+    isMousePressed,
+  } from './stores';
   import { getAllNotes, getMidiForSelectedChord, getOctaveLength, noteIdxToMidi, noteInCurrentKey } from './utils';
   import Key from './Key.svelte';
 
   const allNotes = getAllNotes();
 
   $: keysInSelectedChord = getMidiForSelectedChord($selectedChord, $currentOctaveIdx);
+
+  const onMouseDown = () => {
+    isMousePressed.update(pressed => true);
+  };
+
+  const onMouseUp = () => {
+    isMousePressed.update(pressed => false);
+  };
 </script>
 
 <style type="text/scss">
@@ -33,7 +49,11 @@
   }
 </style>
 
-<div class="Keyboard">
+<div
+  class="Keyboard"
+  on:mousedown={onMouseDown}
+  on:mouseup={onMouseUp}
+>
   {#each allNotes as note, idx (idx)}
     {#if
       Math.floor(idx / getOctaveLength()) >= $currentOctaveIdx &&
@@ -42,6 +62,7 @@
         <Key
           note={note}
           idx={idx + $keyOffset + 1}
+          midi={noteIdxToMidi(idx, $keyOffset)}
           highlighted={$currentKey && noteInCurrentKey(note, $currentKey)}
           disabled={$currentKey && !noteInCurrentKey(note, $currentKey)}
           selected={keysInSelectedChord.indexOf(noteIdxToMidi(idx, $keyOffset)) > -1}

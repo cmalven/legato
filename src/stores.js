@@ -39,3 +39,8 @@ export const currentKey = writable(null);
  * The currently selected chord progression
  */
 export const currentChordProgression = writable(null);
+
+/**
+ * Is the mouse currently pressed down
+ */
+export const isMousePressed = writable(false);

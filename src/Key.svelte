@@ -1,14 +1,48 @@
 <script>
   import { formatNotation, isNoteBlack } from './utils';
+  import { notes, isMousePressed } from './stores';
 
   export let note = null;
   export let on = false;
   export let idx = 0;
+  export let midi = 0;
   export let selected = false;
   export let highlighted = false;
   export let disabled = false;
 
   const isBlack = isNoteBlack(note);
+
+  const addNote = () => {
+    notes.update(notes => {
+      return [...notes, midi];
+    });
+  };
+
+  const removeNote = () => {
+    notes.update(notes => {
+      return notes.filter(val => val !== midi);
+    });
+  };
+
+  const onMouseDown = () => {
+    addNote();
+  };
+
+  const onMouseUp = () => {
+    removeNote();
+  };
+
+  const onMouseEnter = () => {
+    if ($isMousePressed) {
+      addNote();
+    }
+  };
+
+  const onMouseLeave = () => {
+    if ($isMousePressed) {
+      removeNote();
+    }
+  };
 </script>
 
 <style type="text/scss">
@@ -33,6 +67,7 @@
     transform-origin: 50% -20px;
     will-change: transform;
     overflow: hidden;
+    user-select: none;
 
     &:before,
     &:after {
@@ -154,6 +189,10 @@
   class:selected
   class:disabled
   style="transform: rotateX({on ? -3 : 0}deg) translateZ({isBlack ? 15 : 0}px);"
+  on:mousedown={onMouseDown}
+  on:mouseup={onMouseUp}
+  on:mouseenter={onMouseEnter}
+  on:mouseleave={onMouseLeave}
 >
 
   <div class="info">
