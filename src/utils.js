@@ -142,18 +142,17 @@ export const getMidiForSelectedChord = (chordName, octaveIdx) => {
   const chord = Chord.get(chordName);
   if (chord.empty) return [];
 
-  const notes = chord.notes;
+  return getMidiForNotes(chord.notes, octaveIdx);
+};
 
+export const getMidiForNotes = (notes, octaveIdx) => {
   const firstNotePosition = getFirstMidiNoteForOctave(notes[0], octaveIdx);
 
-  const midiNotes = notes.map((note, idx) => {
+  return notes.map((note, idx) => {
     const firstNote = getFirstMidiNoteForOctave(note, octaveIdx, firstNotePosition);
     return Midi.toMidi(firstNote);
   });
-
-  return midiNotes;
 };
-
 
 export const loadScript = (src, callback, script) => {
   script = document.createElement('script');
