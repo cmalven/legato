@@ -1,14 +1,12 @@
-<script>
-  import WebMidi from 'webmidi';
-  import 'webaudiofont';
+<script context="module">
   import { notes, playSynthSounds, synthInstrument } from './stores';
   import { loadScript } from './utils';
 
   let clicked = false;
-  let isSynthSetup = false;
   let AudioContextFunc = null;
   let audioContext = null;
   let player = null;
+  let playerLoaded = false;
   let src;
   let tone;
 
@@ -18,6 +16,7 @@
 
   const updateSynthInstrument = (instrument) => {
     if (!clicked || !instrument) return;
+    playerLoaded = false;
     src = `https://surikov.github.io/webaudiofontdata/sound/${instrument}_sf2_file.js`;
     tone = `_tone_${instrument}_sf2_file`;
 
@@ -26,16 +25,22 @@
       audioContext = new AudioContextFunc();
       player = new WebAudioFontPlayer();
       player.loader.decodeAfterLoading(audioContext, tone);
-      isSynthSetup = true;
+      player.loader.waitLoad(() => playerLoaded = true);
     });
-  };
-
-  const playKey = (pitch) => {
-    player.queueWaveTable(audioContext, audioContext.destination, window[tone], 0, pitch, 0.75);
   };
 
   // Actually start listening for instrument to be selected
   synthInstrument.subscribe(updateSynthInstrument);
+
+  export const playNote = (pitch) => {
+    if (!playerLoaded) return;
+    player.queueWaveTable(audioContext, audioContext.destination, window[tone], 0, pitch, 0.75);
+  };
+</script>
+
+<script>
+  import WebMidi from 'webmidi';
+  import 'webaudiofont';
 
   const midiListen = () => {
     console.log('listening');
@@ -51,7 +56,7 @@
     console.log(`note on: ${note}`);
 
     // Play synthesized sound
-    if ($playSynthSounds && player) playKey(note);
+    if ($playSynthSounds && player) playNote(note);
 
     notes.update(notes => {
       return [...notes, note];

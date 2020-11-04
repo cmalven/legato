@@ -1,6 +1,7 @@
 <script>
-  import { formatNotation } from './utils';
-  import { selectedChord } from './stores';
+  import { formatNotation, getMidiForSelectedChord } from './utils';
+  import { selectedChord, currentOctaveIdx } from './stores';
+  import { playNote } from './Midi.svelte';
 
   export let name;
 
@@ -15,6 +16,13 @@
       return null;
     });
   };
+
+  const onMouseDown = () => {
+    const notes = getMidiForSelectedChord(name, $currentOctaveIdx);
+    notes.forEach((note, idx) => {
+      window.setTimeout(playNote.bind(null, note), idx * 20);
+    });
+  };
 </script>
 
 <style type="text/scss">
@@ -25,6 +33,11 @@
     padding: 8px;
     color: white;
     transition: border-color 0.2s;
+    cursor: pointer;
+
+    &:active {
+      opacity: 0.5;
+    }
 
     &:hover {
       border-color: white;
@@ -32,7 +45,7 @@
   }
 </style>
 
-<div class="Chord" on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
+<div class="Chord" on:mousedown={onMouseDown} on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
   {formatNotation(name)}
 </div>
 
