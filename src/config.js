@@ -3,7 +3,7 @@ export const octave = [
     names: ['C'],
   },
   {
-    names: ['C#', 'Bb'],
+    names: ['C#', 'Db'],
   },
   {
     names: ['D'],
