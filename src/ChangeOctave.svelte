@@ -2,6 +2,7 @@
   import { currentOctaveIdx, visibleOctaves } from './stores';
   import { getNumOctaves, getOctaveJumps } from './utils';
   import ControlSet from './ControlSet.svelte';
+  import PrevNext from './PrevNext.svelte';
 
   $: octaveJumps = getOctaveJumps(getNumOctaves(), $visibleOctaves);
 
@@ -36,7 +37,7 @@
     width: 70px;
     justify-content: space-between;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 5px;
   }
 
   .indicator-dot {
@@ -57,44 +58,6 @@
       opacity: 1;
     }
   }
-
-  .btns {
-
-  }
-
-  .btn {
-    border-radius: 0;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 5px 0;
-    border-bottom: 1px solid transparent;
-
-    & + & {
-      margin-left: 20px;
-    }
-
-    &:active {
-      opacity: 0.8;
-    }
-
-    &:hover {
-      border-bottom-color: white;
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    &.btn--prev {
-      content: 'Prev';
-    }
-
-    &.btn--next {
-      content: 'Next';
-    }
-  }
 </style>
 
 <ControlSet label="Octave">
@@ -108,9 +71,6 @@
       {/each}
     </div>
 
-    <div class="btns">
-      <button on:click={prevOctave} class="btn btn--prev">Previous</button>
-      <button on:click={nextOctave} class="btn btn--next">Next</button>
-    </div>
+    <PrevNext prev={prevOctave} next={nextOctave} />
   </div>
 </ControlSet>
