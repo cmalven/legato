@@ -1,4 +1,6 @@
 <script context="module">
+  import WebMidi from 'webmidi';
+  import 'webaudiofont';
   import { notes, playSynthSounds, synthInstrument } from './stores';
   import { loadScript } from './utils';
 
@@ -9,6 +11,7 @@
   let playerLoaded = false;
   let src;
   let tone;
+  let midiOutput = null;
 
   document.addEventListener('click', () => {
     clicked = true;
@@ -32,18 +35,57 @@
   // Actually start listening for instrument to be selected
   synthInstrument.subscribe(updateSynthInstrument);
 
+  /**
+   * Plays a given MIDI note on one of the built-in synthesizer instruments,
+   * or a virtual software instrument such as MainStage or Ableton Live.
+   * @param pitch
+   */
   export const playNote = (pitch) => {
+    playMidi(pitch);
     if (!playerLoaded) return;
     player.queueWaveTable(audioContext, audioContext.destination, window[tone], 0, pitch, 0.75);
+  };
+
+  /**
+   * Stop playing a note.
+   * @param pitch
+ */
+  export const stopNote = (pitch) => {
+    stopMidi(pitch);
+  };
+
+  /**
+   * Plays a given MIDI note on a virtual software instrument via MIDI.
+   * If you want to play a virtual instrument in software such as MainStage,
+   * Ableton Live, or Logic, you must set up an IAC Driver in Audio MIDI Setup
+   * on your mac using the following steps:
+   *
+   * 1. Open Audio MIDI Setup
+   * 2. Choose Window > Show MIDI Studio
+   * 3. Double-click on IAC Driver
+   * 4. Check the box for "Device is online"
+   * 5. Click "Apply" and close the window
+   * 6. Make sure that your software using using the new IAC Driver as an input
+   * @param pitch
+   */
+  const playMidi = (pitch) => {
+    if (midiOutput) {
+      midiOutput.playNote(pitch, 'all', {
+        velocity: 0.3,
+      });
+    }
+  };
+
+  const stopMidi = (pitch) => {
+    if (midiOutput) {
+      midiOutput.stopNote(pitch);
+    }
   };
 </script>
 
 <script>
-  import WebMidi from 'webmidi';
-  import 'webaudiofont';
-
   const midiListen = () => {
-    console.log('listening');
+    midiOutput = WebMidi.getOutputByName('IAC Driver Bus 1');
     WebMidi.inputs.forEach(input => {
       input.addListener('noteon', 'all', onNoteOn);
       input.addListener('noteoff', 'all', onNoteOff);
@@ -56,7 +98,7 @@
     console.log(`note on: ${note}`);
 
     // Play synthesized sound
-    if ($playSynthSounds && player) playNote(note);
+    if ($playSynthSounds && player && !midiOutput) playNote(note);
 
     notes.update(notes => {
       return [...notes, note];
@@ -73,6 +115,7 @@
     });
   };
 
+  // If MIDI is supported by the browser, request MIDI access
   new Promise((res, rej) => {
     const webmidiEnabled = navigator.requestMIDIAccess;
 

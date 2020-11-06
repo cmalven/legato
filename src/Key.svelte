@@ -1,7 +1,7 @@
 <script>
   import { formatNotation, isNoteBlack } from './utils';
   import { notes, isMousePressed } from './stores';
-  import { playNote } from './Midi.svelte';
+  import { playNote, stopNote } from './Midi.svelte';
 
   export let note = null;
   export let on = false;
@@ -14,12 +14,14 @@
   const isBlack = isNoteBlack(note);
 
   const addNote = () => {
+    playNote(midi);
     notes.update(notes => {
       return [...notes, midi];
     });
   };
 
   const removeNote = () => {
+    stopNote(midi);
     notes.update(notes => {
       return notes.filter(val => val !== midi);
     });
@@ -27,7 +29,6 @@
 
   const onMouseDown = () => {
     addNote();
-    playNote(midi);
   };
 
   const onMouseUp = () => {
@@ -37,7 +38,6 @@
   const onMouseEnter = () => {
     if ($isMousePressed) {
       addNote();
-      playNote(midi);
     }
   };
 
