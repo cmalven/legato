@@ -34,6 +34,7 @@
     color: white;
     transition: border-color 0.2s;
     cursor: pointer;
+    min-width: 40px;
 
     &:active {
       opacity: 0.5;

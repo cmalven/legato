@@ -18,20 +18,21 @@
     --black-key-ratio: calc(0.5 / 3.9375);
     --scale: 370px;
     --key-margin: calc(var(--scale) * 0.005);
-    margin: 0;
     font-family: 'Georgia', 'Times', 'Times New Roman', serif;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     background-color: black;
+    margin: 0;
   }
 
   .App {
+    margin: 50px 0;
     flex: 1;
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     perspective: 1000px;
     transform-style: preserve-3d;
@@ -42,9 +43,7 @@
   <Midi />
 
   <ControlLayout>
-    <span slot="left">
-      <Chords />
-    </span>
+    <span slot="left"></span>
     <span slot="center">
       <Toolbar>
         <KeySelect />
@@ -56,6 +55,7 @@
     </span>
   </ControlLayout>
 
+  <Chords />
 
   <Keyboard/>
 

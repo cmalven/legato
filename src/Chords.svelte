@@ -9,9 +9,14 @@
 </script>
 
 <style type="text/scss">
+  .Chords {
+    width: 100%;
+  }
+
   .chord-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    margin: 0 50px;
+    display: flex;
+    justify-content: center;
     grid-gap: 10px;
   }
 </style>
