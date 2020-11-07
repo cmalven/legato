@@ -1,9 +1,16 @@
 <script>
   import { formatNotation, getMidiForSelectedChord } from './utils';
   import { selectedChord, currentOctaveIdx } from './stores';
-  import { playNote } from './Midi.svelte';
+  import { playNote, stopNote } from './Midi.svelte';
 
   export let name;
+
+  $: midiNotes = getMidiForSelectedChord(name, $currentOctaveIdx);
+
+  $: noteTimeouts = midiNotes.reduce((acc, note) => {
+    acc[note] = null;
+    return acc;
+  }, {});
 
   const onMouseEnter = evt => {
     selectedChord.update(chord => {
@@ -18,9 +25,15 @@
   };
 
   const onMouseDown = () => {
-    const notes = getMidiForSelectedChord(name, $currentOctaveIdx);
-    notes.forEach((note, idx) => {
-      window.setTimeout(playNote.bind(null, note), idx * 20);
+    midiNotes.forEach((note, idx) => {
+      window.clearTimeout(noteTimeouts[note]);
+      playNote(note);
+    });
+  };
+
+  const onMouseUp = () => {
+    midiNotes.forEach((note, idx) => {
+      stopNote(note);
     });
   };
 </script>
@@ -46,7 +59,7 @@
   }
 </style>
 
-<div class="Chord" on:mousedown={onMouseDown} on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
+<div class="Chord" on:mousedown={onMouseDown} on:mouseup={onMouseUp} on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
   {formatNotation(name)}
 </div>
 
