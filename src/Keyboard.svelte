@@ -26,7 +26,9 @@
 
 <style type="text/scss">
   .Keyboard {
-    margin: 30px 0 120px;
+    margin: auto 0;
+    position: relative;
+    top: -30px;
     width: 90%;
     display: flex;
     justify-content: center;

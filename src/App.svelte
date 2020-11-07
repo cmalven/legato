@@ -12,6 +12,9 @@
 </script>
 
 <style type="text/scss">
+  @include reset;
+  @include base;
+
   :global(body) {
     --white-key-ratio: calc(0.875 / 5.7);
     --black-key-height-ratio: calc(4.2 / 6);
@@ -24,6 +27,7 @@
     flex-direction: column;
     background-color: black;
     margin: 0;
+    overflow: hidden;
   }
 
   .App {
@@ -32,7 +36,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     perspective: 1000px;
     transform-style: preserve-3d;

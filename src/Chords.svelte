@@ -11,6 +11,7 @@
 <style type="text/scss">
   .Chords {
     width: 100%;
+    min-height: 40px;
   }
 
   .chord-list {
