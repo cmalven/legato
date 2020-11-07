@@ -18,6 +18,7 @@
     const midiScale = getMidiForNotes(key.scale, $currentOctaveIdx);
     midiScale.forEach((note, idx) => {
       window.setTimeout(playNote.bind(null, note), idx * 150);
+      window.setTimeout(stopNote.bind(null, note), (idx + 1) * 300);
     });
   });
 </script>
